@@ -1,0 +1,140 @@
+p{
+    padding: 0;
+    margin: 0;
+}
+.level{
+    font-size: 40px;
+    font-weight: 900;
+    color:black;
+
+}
+.statement{
+    display: fixed;
+    
+    font-size: 20px;
+    font-weight: 400px;
+    color:grey;
+    text-align: end;
+
+    margin-top: 25%;
+
+}
+.task{
+    font-size: 20px;
+    font-weight: 400px;
+    color:grey;
+    text-align: end;
+
+    margin-top: 5%;
+}
+
+.input{
+    min-width: 0;
+
+    height: 8%;
+    width: 60%;
+    padding-left: 5%;
+    
+    border-radius: 80px;
+    border:none;
+    box-shadow:5px 5px 15px rgba(0,0,0, 0.15);
+    outline: none;
+
+    font-size: 20px;
+    margin-top: 8%;
+}
+.previouslevel-button{
+    position: fixed;
+
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(255, 213, 0);
+    height: 5%;
+    width: 5%;
+    margin-left: 4%;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: inherit;
+}
+.previouslevel-button:hover{
+    cursor: pointer;
+    background-color: rgb(255, 227, 87);
+    box-shadow: 0px 0px 5px gray;
+}
+
+.check{
+    margin-top: 3%;
+
+    height: 8%;
+    width: 20%;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(59, 59, 59);
+
+    border-radius: 25px;
+    background-color: rgb(36, 226, 18);
+
+    border: none;
+
+    transition:opacity 0.15s;
+    
+}
+.check:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 5px gray;
+}
+.check:active{
+    opacity:0.5;
+}
+
+.result{
+    font-size: 30px;
+    font-weight: 700;
+
+    color: red;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.nextlevel-button{
+    margin-top: 10%;
+    margin-bottom: 20%;
+
+    padding: 5px 0px 5px 0px ;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(59, 59, 59);
+
+    border-radius: 25px;
+    background-color: yellow;
+
+    border: none;
+
+    transition:opacity 0.15s;
+}
+.nextlevel-button:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 5px gray;
+}
+
+.correct{
+    margin-top: 5%;
+    font-size: 30px;
+    font-weight: 700;
+
+    color: rgb(17, 188, 17);
+}
+.preview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 80%;
+    width: 80%;
+
+    border-radius: 30px;
+}

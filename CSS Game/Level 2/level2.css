@@ -1,0 +1,116 @@
+.level2-body{
+    font-family:"fredoka",sans-serif;
+    background: url(space-background.jpg);
+    background-size: cover;
+
+    animation: show 0.8s 1;
+}
+
+@keyframes show{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.l2-outer{
+    display: flex;
+
+    margin-top: 15vh;
+    height: 70vh;
+    width: 70%;
+    
+    border-radius: 30px;
+    margin-left: 15%;
+
+}
+
+.l2-inner-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: lightpink;
+    height: 100%;
+
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+    flex: 1;
+}
+
+.l2-inner-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: rgb(161, 218, 236);
+
+    height: 100%;
+
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+    flex: 1;
+}
+
+.for-grid{
+    display: grid;
+
+    height: 60%;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.planet-box{
+    grid-area: 1/1;
+}
+.planet-img{
+    width: 100%;
+    border-radius: 30px;
+    margin-top: -5px;
+}
+.spaceship-box{
+    grid-area: 1/1;
+    justify-self: center;
+    margin-left: 8px;
+    
+    display: flex;
+}
+.spaceship-box-after{
+    grid-area: 1/1;
+    justify-content: center;
+    margin-left: 8px;
+
+    display: flex;
+
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+.spaceship-icon{
+    width: 80px;
+    height: 80px;
+
+    filter: drop-shadow(5px 5px 8px rgb(0, 0, 0));
+
+    animation: vibrate 1.5s infinite;
+    transform:  translateY(10px);
+}
+
+@keyframes vibrate{
+
+    10%{    
+        transform: translateY(10px);
+    }
+    50%{
+        transform: translateY(-5px);
+    }
+    100%{
+        transform: translateY(10px);
+    }
+}
+
