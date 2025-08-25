@@ -1,0 +1,113 @@
+.level1-body{
+    font-family:"fredoka",sans-serif;
+    background: url(football-background.jpg);
+    background-size: cover;
+
+    animation: show 0.8s 1;
+}
+
+@keyframes show{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.l1-outer{
+    display: flex;
+
+    margin-top: 15vh;
+    height: 70vh;
+    width: 70%;
+    
+    border-radius: 30px;
+    margin-left: 15%;
+
+}
+
+.l1-inner-left{
+    position:relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:url(green-background.jpg);
+    height: 100%;
+
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+    flex: 1;
+}
+
+.l1-inner-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: rgb(161, 218, 236);
+
+    height: 100%;
+
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+    flex: 1;
+    
+}
+.for-grid{
+    display: grid;
+
+    height: 50%;
+    width: 100%;
+    border-radius: 30px;
+}
+.field-box{
+    grid-area: 1/1;
+}
+.field-img{
+    width: 100%;
+    border-radius: 30px;
+    margin-top: -5px;
+}
+.ball-box{
+    grid-area: 1/1;
+    align-self: center;
+    margin-left: 10px;
+
+    padding-bottom: 9%;
+    
+    display: flex;
+}
+.ball-box-after{
+    grid-area: 1/1;
+    align-self: center;
+    
+    display: flex;
+    justify-content: center;
+
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+.ball-img{
+    width: 10%;
+    filter: drop-shadow(5px 5px 8px rgb(0, 0, 0));
+    
+    animation: jump 1s infinite ease-out;
+}
+
+@keyframes jump{
+    10%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-15px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
