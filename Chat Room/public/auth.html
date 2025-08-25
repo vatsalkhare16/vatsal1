@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Login - Chat App</title>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                    <h1>Chat App</h1>
+                </div>
+                <p class="tagline">Connect with friends and family instantly</p>
+            </div>
+
+            <div id="login-form" class="auth-form">
+                <h2>Welcome Back</h2>
+                <p class="form-subtitle">Sign in to continue</p>
+                
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input id="login-email" type="email" placeholder="Email" />
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input id="login-password" type="password" placeholder="Password" />
+                </div>
+
+                <button onclick="login()" class="auth-button">
+                    <span>Sign In</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <p class="auth-switch">
+                    Don't have an account? 
+                    <a href="#" onclick="toggleForms()">Sign up</a>
+                </p>
+            </div>
+
+            <div id="signup-form" class="auth-form" style="display: none;">
+                <h2>Create Account</h2>
+                <p class="form-subtitle">Join our community</p>
+                
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input id="signup-email" type="email" placeholder="Email" />
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input id="signup-username" type="text" placeholder="Username" />
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input id="signup-password" type="password" placeholder="Password" />
+                </div>
+
+                <button onclick="signup()" class="auth-button">
+                    <span>Create Account</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <p class="auth-switch">
+                    Already have an account? 
+                    <a href="#" onclick="toggleForms()">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+        
+        const supabase = createClient(
+            'https://cyporxvxzrzgshiajtvi.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5cG9yeHZ4enJ6Z3NoaWFqdHZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUzNzU0NDYsImV4cCI6MjA2MDk1MTQ0Nn0.tcOAK6bHQ15pVDn0KGWTXcCyARHMvhlHnG6HSbzgaqE'
+        );
+
+        // Toggle between login and signup forms
+        window.toggleForms = function() {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+            }
+        }
+
+        // Login function
+        window.login = async function() {
+            try {
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+
+                if (!email || !password) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+                if (error) throw error;
+                
+                // Store the session token
+                localStorage.setItem('supabase.auth.token', data.session.access_token);
+                location.href = '/';
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        // Signup function
+        window.signup = async function() {
+            try {
+                const email = document.getElementById('signup-email').value;
+                const username = document.getElementById('signup-username').value;
+                const password = document.getElementById('signup-password').value;
+
+                if (!email || !username || !password) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                // First create the auth user
+                const { data: authData, error: authError } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: {
+                            username: username
+                        }
+                    }
+                });
+                if (authError) throw authError;
+
+                // Then create the user profile in the users table
+                const { error: profileError } = await supabase
+                    .from('users')
+                    .insert([
+                        {
+                            id: authData.user.id,
+                            email: email,
+                            username: username
+                        }
+                    ]);
+                if (profileError) throw profileError;
+                
+                alert('Account created successfully! Please check your email for confirmation.');
+                toggleForms(); // Switch back to login form
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+    </script>
+</body>
+</html>
